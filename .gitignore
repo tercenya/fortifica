@@ -1,0 +1,4 @@
+*.sublime-workspace
+
+# woe unto you if you try 'git add .vagrant'
+.vagrant
