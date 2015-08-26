@@ -1,8 +1,18 @@
 {
-	"folders":
-	[
-		{
-			"path": "."
-		}
-	]
+  "folders":
+  [
+    {
+      "file_exclude_patterns":
+      [
+        "dataminer/data/*.json",
+        "ui/npm*.log",
+        "*.lock"
+      ],
+      "folder_exclude_patterns":
+      [
+        "ui/node_modules"
+      ],
+      "path": "."
+    }
+  ]
 }
