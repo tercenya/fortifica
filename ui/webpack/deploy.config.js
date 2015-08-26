@@ -1,7 +1,7 @@
 module.exports = require("./webpack.config")({
-  devServer: true,
-  hotComponents: true,
+  devServer: false,
+  hotComponents: false,
   devtool: "eval",
-  debug: true,
+  debug: false,
   separateStylesheet: true
 });
