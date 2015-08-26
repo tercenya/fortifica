@@ -1,28 +1,25 @@
 require 'fileutils'
 require 'rest_client'
 require 'addressable/uri'
-
+require 'yaml'
+require 'active_support/core_ext/hash/indifferent_access'
 
 module Riot
   class Api
-    # DO NOT COMMIT THIS
-    API_KEY = '96d5f816-0793-42ba-8387-3250e76ee55c'
     PATH = "/code/others/lol/bilgewater/data"
-
     attr_reader :region, :host
 
     def initialize(region = :na)
       @region = region.to_s
       @host = "https://#{@region}.api.pvp.net/api/lol/"
+
+      path = File.expand_path('../../../config/api.yml', __FILE__)
+      config =  YAML.load_file(path).with_indifferent_access
+
+      @api_key = config[:api_key]
     end
 
-    def api_challenge(epoch, region = 'na')
-      url = build_url("v4.1/game/ids?beginDate=#{epoch}")
-      result = execute_and_save!(:api_challenge, epoch, url)
-      JSON.parse(result)
-    end
-
-    def match(id, region = 'na')
+    def match(id)
       url = build_url("v2.2/match/#{id}?includeTimeline=true")
       execute_and_save!(:match, id, url)
     end
@@ -48,7 +45,7 @@ module Riot
     def build_url(url)
       path = ::Addressable::URI.join(host, "#{region}/", url)
       uri = ::Addressable::URI.parse(path)
-      uri.query_values = (uri.query_values || {}).merge({api_key: API_KEY})
+      uri.query_values = (uri.query_values || {}).merge({api_key: @api_key})
       uri.to_s
     end
 

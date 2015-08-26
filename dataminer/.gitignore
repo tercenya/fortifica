@@ -5,14 +5,12 @@
 /log/*
 /tmp
 
+# stop commiting api keys
+config/api.yml
+
 # all match data
 data/*
 
 # don't lock the versions in development
 Gemfile.lock
 Berksfile.lock
-
-*.sublime-workspace
-
-# woe unto you if you try 'git add .vagrant'
-.vagrant
