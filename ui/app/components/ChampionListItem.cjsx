@@ -1,19 +1,20 @@
 _ = require('lodash')
 React = require('react')
+{ Link } = require('react-router')
 
-class Champion extends React.Component
+class ChampionListItem extends React.Component
   render: ->
     champion = this.props.champion
     squareImage = "http://ddragon.leagueoflegends.com/cdn/5.16.1/img/champion/#{champion.id}.png"
     href = "/champions/#{champion.name}"
 
     <li key=champion.id className='champion-listitem'>
-      <a href={href}>
+      <Link to='championDetails' championName={champion.name} >
         <div className='champion-listitem__image_background'>
           <img className='champion-listitem__image' src={squareImage} alt={champion.name} />
         </div>
         <div className='champion-listitem__text'>{champion.name}</div>
-      </a>
+      </Link>
     </li>
 
-module.exports = Champion
+module.exports = ChampionListItem

@@ -3,7 +3,7 @@ React = require('react')
 ChampionStore = require('../stores/ChampionStore')
 ChampionActions = require('../actions/ChampionActions')
 
-Champion = require('./Champion')
+ChampionListItem = require('./ChampionListItem')
 
 class ChampionList extends React.Component
   constructor: (props) ->
@@ -26,7 +26,7 @@ class ChampionList extends React.Component
 
     console.log(this.state.champions)
     championList = this.state.champions.map (e) ->
-      <Champion champion={e} key={e.id} />
+      <ChampionListItem champion={e} key={e.id} />
 
     return(
       <ul className='champion-list'>{championList}</ul>
