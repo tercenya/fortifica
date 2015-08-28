@@ -3,33 +3,7 @@ webpack = require('webpack')
 _ = require('lodash')
 ExtractTextPlugin = require('extract-text-webpack-plugin')
 StatsPlugin = require('stats-webpack-plugin')
-
-
-extsToRegExp = (exts) ->
-  new RegExp('\\.(' + exts.map((ext) ->
-    ext.replace /\./g, '\\.'
-  ).join('|') + ')(\\?.*)?$')
-
-loadersByExtension = (obj) ->
-  loaders = []
-  Object.keys(obj).forEach (key) ->
-    exts = key.split('|')
-    value = obj[key]
-    entry =
-      extensions: exts
-      test: extsToRegExp(exts)
-    if Array.isArray(value)
-      entry.loaders = value
-    else if typeof value == 'string'
-      entry.loader = value
-    else
-      Object.keys(value).forEach (valueKey) ->
-        entry[valueKey] = value[valueKey]
-        return
-    loaders.push entry
-    return
-
-  return loaders
+loadersByExtension = require('./util/loadersByExtension')
 
 module.exports = (options) ->
   root = path.join(__dirname, '../')
@@ -43,7 +17,10 @@ module.exports = (options) ->
     bootstrap: [
       'bootstrap-sass!' + path.join(root, '/config/bootstrap/config.js')
     ]
-    fortifica: path.join(base, 'app')
+    fortifica: [
+      path.join(base, 'app.coffee')
+      path.join(base, 'fortifica.scss')
+    ]
     index: '!file-loader?name=../index.html!' + path.join(base, 'index.html')
 
   hotLoader = []
@@ -73,6 +50,7 @@ module.exports = (options) ->
     'svg': 'file-loader'
     'html': 'html-loader'
     'md|markdown': [ 'html-loader', 'markdown-loader' ]
+    'json': 'json-loader'
 
   cssLoader = 'css-loader'
   stylesheetLoaders =
