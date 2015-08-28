@@ -9,7 +9,7 @@ class ChampionListItem extends React.Component
     href = "/champions/#{champion.name}"
 
     <li key=champion.id className='champion-listitem'>
-      <Link to='championDetails' championName={champion.name} >
+      <Link to='championDetails' params={{name: champion.name}} >
         <div className='champion-listitem__image_background'>
           <img className='champion-listitem__image' src={squareImage} alt={champion.name} />
         </div>

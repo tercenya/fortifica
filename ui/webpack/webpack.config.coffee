@@ -18,7 +18,7 @@ module.exports = (options) ->
       'bootstrap-sass!' + path.join(root, '/config/bootstrap/config.js')
     ]
     fortifica: [
-      path.join(base, 'app.coffee')
+      path.join(base, 'app.cjsx')
       path.join(base, 'fortifica.scss')
     ]
     index: '!file-loader?name=../index.html!' + path.join(base, 'index.html')

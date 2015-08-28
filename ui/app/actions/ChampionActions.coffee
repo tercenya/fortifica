@@ -9,7 +9,7 @@ class ChampionActions
     this.dispatch()
 
     API.fetchChampions().then( (championData) =>
-      this.actions.receiveChampions(championData)
+      this.actions.receiveChampion(championData)
     )
 
 module.exports = alt.createActions(ChampionActions)

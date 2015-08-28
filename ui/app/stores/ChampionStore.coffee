@@ -6,11 +6,13 @@ class ChampionStore
   constructor: ->
     this.isLoading = true
     this.champions = []
+    this.championMap = {}
 
     this.bindActions(ChampionActions)
 
   onReceiveChampions: (championData) ->
     this.isLoading = false
+    this.championMap = championData.data
     this.champions = _.values(championData.data)
 
 module.exports = alt.createStore(ChampionStore, 'ChampionStore')

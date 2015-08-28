@@ -1,5 +1,6 @@
 _ = require('lodash')
 React = require('react')
+
 ChampionStore = require('../stores/ChampionStore')
 ChampionActions = require('../actions/ChampionActions')
 
@@ -15,7 +16,7 @@ class ChampionList extends React.Component
     ChampionActions.fetchChampions()
 
   componentWillUnmount: =>
-    ChampionActions.unlisten(this.onChange)
+    ChampionStore.unlisten(this.onChange)
 
   onChange: (store) =>
     this.setState(store)
