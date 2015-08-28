@@ -6,7 +6,7 @@ require 'active_support/core_ext/hash/indifferent_access'
 
 module Riot
   class Api
-    PATH = "/code/others/lol/bilgewater/data"
+    PATH = "/code/others/lol/bilgewater/data/ap/5.11"
     attr_reader :region, :host
 
     def initialize(region = :na)
@@ -63,7 +63,7 @@ module Riot
       # can't make more than 10 queries 10 seconds or 500 queries in 600 sec
       timeout = 1.3
       # puts "sleeping #{timeout} #{Time.now}"
-      sleep(timeout)
+      #sleep(timeout)
       return result
     end
 
@@ -71,12 +71,11 @@ module Riot
       return execute!(url)
     rescue RestClient::TooManyRequests => e
       puts "*** 429, retrying"
-      puts "**** DEBUG headers:"
       puts e.response.headers.inspect
       if timeout = e.response.headers['Retry-After']
         sleep(timeout.to_i + 5)
       else
-        sleep(3)
+        sleep(1)
       end
       return execute!(url)
     end

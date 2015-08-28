@@ -13,9 +13,6 @@ require 'active_support/time'
 
 require_relative '../lib/riot/api'
 
-# puts "pre-emptive sleep #{Time.now}"
-# sleep(150)
-
 regions = %w[
   NA
   EUNE
@@ -31,7 +28,7 @@ regions = %w[
 
 regions.each do |region|
   region = region.downcase
-  json = File.read("../data/source/#{region}.json")
+  json = File.read("../data/AP_ITEM_DATASET/5.14/RANKED_SOLO/#{region}.json")
   matches = JSON.parse(json)
 
   api = Riot::Api.new(region)
@@ -40,11 +37,7 @@ regions.each do |region|
       api.match(match.to_i)
     rescue Exception => e
       puts "XXX FAILED #{region} #{match}"
-      puts "**** DEBUG:"
-      puts e.response.headers.inspect
-      puts "XXX sleeping"
-      sleep(10)
-      puts "XXX resuming"
+      puts e.response.headers.inspect if e.respond_to?(:response)
     end
     $stdout.flush
   end
