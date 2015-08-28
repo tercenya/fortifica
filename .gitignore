@@ -2,3 +2,4 @@
 
 # woe unto you if you try 'git add .vagrant'
 .vagrant
+dataminer/config/api.yml.development
