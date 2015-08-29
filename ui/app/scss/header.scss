@@ -1,0 +1,67 @@
+.masthead {
+  background-color: black;
+  color: white;
+
+  .masthead-title__container {
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .masthead-title {
+    font-size: 2em;
+    margin: 0;
+    font-weight: 800;
+    font-variant: small-caps;
+    font-family: 'Helvetica Neue';
+    letter-spacing: 2.5px;
+  }
+
+  .masthead-subtitle {
+    font-size: 1em;
+    margin: 0;
+  }
+
+  .master-nav {
+    position: relative;
+    padding-left: 30em;
+
+    .master-nav__link {
+      width: 5em;
+      padding-left: 24px;
+      padding-right: 24px;
+      color: white;
+      border-right: 1px solid white;
+    }
+
+    .master-nav__link:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.halfpage {
+  .masthead {
+    height: 50em;
+
+    .masthead-title__container {
+      position: relative;
+      bottom: -40em;
+      padding-left: 28px;
+    }
+  }
+
+  .master-nav {
+    bottom: -42em;
+  }
+}
+
+.topbar {
+  .masthead-title__container {
+    display: inline-block;
+    padding-bottom: 8px;
+  }
+  .master-nav {
+    display: inline-block;
+    padding-left: 10em;
+  }
+}

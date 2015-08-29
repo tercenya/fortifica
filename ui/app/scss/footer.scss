@@ -1,0 +1,22 @@
+.master-footer {
+  background-color: black;
+  overflow: auto;
+  color: grey;
+  width: 100%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+
+  a {
+    color: inherit;
+  }
+
+  .left {
+    padding-left: 32px;
+    float: left;
+  }
+
+  .right {
+    float: right;
+    padding-right: 32px;
+  }
+}

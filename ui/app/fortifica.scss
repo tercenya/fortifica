@@ -1,7 +1,9 @@
 body {
   font-family: 'Lato', 'Helvetica Neue', 'Roboto', 'Helvetica', sans-serif;
-  background-color: grey;
+  background-color: #222;
   color: white;
+  margin: 0;
+  padding: 0;
 }
 
 .master_layout__container {
@@ -10,89 +12,20 @@ body {
     height: 100%;
 }
 
-.masthead {
-  height: 50em;
-  background-color: black;
-  color: white;
+.content {
+  display: block;
+  clear: both;
+  overflow: auto;
+  min-height: 50em;
 
-  .masthead-title__container {
-    position: relative;
-    bottom: -40em;
-    padding-left: 28px;
-  }
-
-  .masthead-title {
-    font-size: 2em;
-    margin: 0;
-    font-weight: 800;
-    font-variant: small-caps;
-    font-family: 'Helvetica Neue';
-    letter-spacing: 2.5px;
-  }
-
-  .masthead-subtitle {
-    font-size: 1em;
-    margin: 0;
-  }
-
-
-  .master-nav {
-    position: relative;
-    bottom: -42em;
-    left: 30em;
-
-    .master-nav__link {
-      width: 5em;
-      padding-left: 24px;
-      padding-right: 24px;
-      color: white;
-      border-right: 1px solid white;
-    }
-
-    .master-nav__link:last-child {
-      border-right: none;
-    }
+  &.centered {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
   }
 }
 
-.champion-list {
-  list-style: none;
-  padding: 0 40px 0 40px;
-
-  a {
-    color: white;
-  }
-
-  .champion-listitem {
-    background-color: black;
-    border: 1px solid black;
-    width: 92px;
-    float: left;
-    margin: 0px 8px 8px 0px;
-
-    &:hover {
-      border: 1px solid #aaa;
-
-      .champion-listitem__image_background {
-        background-color: white;
-      }
-
-      .champion-listitem__image {
-        opacity: 0.9;
-      }
-    }
-  }
-
-
-  .champion-listitem__image {
-    width: 90px;
-    height: 90px;
-  }
-
-  .champion-listitem__text {
-    padding: 2px;
-    width: 90px;
-    text-align: center;
-    display: block;
-  }
-}
+@import 'scss/header';
+@import 'scss/champion_list';
+@import 'scss/footer';
+@import 'scss/item_hierarchy';
