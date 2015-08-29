@@ -11,9 +11,7 @@ class Layout extends React.Component
 
   render: ->
     return(
-      <MasterTemplate>
-        <RouteHandler {...this.props} />
-      </MasterTemplate>
+      <RouteHandler {...this.props} />
     )
 
 module.exports = Layout
