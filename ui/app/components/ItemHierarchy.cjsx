@@ -29,8 +29,10 @@ class ItemHierarchy extends React.Component
 
     return(
       <MasterTemplate>
-        <section>
-          {champion.name}
+        <section className='content centered item-hierarchy'>
+          <div className='splash-image__background'>
+            <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{champion.name}_0.jpg" className='splash-image'/>
+          </div>
         </section>
 
       </MasterTemplate>
