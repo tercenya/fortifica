@@ -51,11 +51,13 @@ class Timeline
 
         purchase.item.from.each do |prereq|
           unless v.find { |e2| e2['eventType'] == 'ITEM_DESTROYED' && e2['participantId'] == e['participantId'] }
-            a << ItemPurchase.new({
-              "eventType": "ITEM_PURCHASED",
-              "timestamp": e['timestamp'],
-              "itemId": prereq.id,
-              "participantId": e['participantId']}, match)
+            new_event = {
+              "eventType" => "ITEM_PURCHASED",
+              "timestamp" => e['timestamp'],
+              "itemId" => prereq.id,
+              "participantId" => e['participantId']
+            }
+            a << ItemPurchase.new(new_event, match)
           end
           # a << purchase
         end

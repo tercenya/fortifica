@@ -36,7 +36,7 @@ class Inventory
   def bought_components(total_components, sold)
     remaining = total_components.dup
     sold.map(&:id).each do |item_id|
-      puts "looking for #{item_id} in #{remaining.map(&:id)}"
+      # puts "looking for #{item_id} in #{remaining.map(&:id)}"
       if index = remaining.map(&:id).index(item_id)
         remaining.delete_at(index)
       end

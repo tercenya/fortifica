@@ -45,4 +45,8 @@ class Item
   def trinket?
     name =~ /Trinket/
   end
+
+  def <=>(other)
+    id <=> other.id
+  end
 end

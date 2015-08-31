@@ -5,6 +5,7 @@ require 'bundler/setup'
 require 'pry'
 require 'json'
 require 'active_support/core_ext/hash/indifferent_access'
+require 'fileutils'
 
 $LOAD_PATH.unshift 'lib'
 
@@ -12,7 +13,7 @@ Dir['lib/*.rb'].each { |file| require_relative file }
 
 data_files = Dir['data/*.json']
 
-hierarchy = EvolutionHierarchy.new(37)
+hierarchy = {}
 
 
 data_files.each_with_index do |data_file,i|
@@ -26,7 +27,7 @@ data_files.each_with_index do |data_file,i|
 
   timeline.event_frames_by_champion.each do |champion_id, frames|
     champion = Champion[champion_id]
-    next unless champion_id == 37 # HACK: sona only, for now
+    # next unless champion_id == 37 # HACK: sona only, for now
 
     inventory = Inventory.new
     ledger = []
@@ -38,7 +39,8 @@ data_files.each_with_index do |data_file,i|
 
     # puts "bought #{interesting_items.map(&:name).join(', ')}"
 
-    node = hierarchy.purchased(ledger)
+    h = hierarchy[champion_id] ||= EvolutionHierarchy.new(champion_id)
+    node = h.purchased(ledger)
 
     # puts "\n\n"
     # puts "node is #{node}"
@@ -46,9 +48,15 @@ data_files.each_with_index do |data_file,i|
     $stdout.flush
   end
   # exit
-  break if i > 500
+  break if i > 5000
 end
 
-hierarchy.children.each do |node|
-  puts "#{node.item.name}: #{node.count}"
+
+FileUtils.rm Dir.glob('output/*.json')
+
+binding.pry
+
+hierarchy.each do |champion_id, tree|
+  data = JSON.dump(tree.to_h)
+  File.write("output/#{champion_id}.json", data)
 end
