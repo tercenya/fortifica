@@ -6,11 +6,13 @@ class ItemHierarchyStore
   constructor: ->
     this.isLoading = true
     this.champion = undefined
+    this.analysis = undefined
 
     this.bindActions(ItemHierarchyActions)
 
-  onReceiveChampion: (championData) ->
+  onReceiveAnalysis: (payload) ->
     this.isLoading = false
-    this.champion = championData
+    this.champion = payload.champion
+    this.analysis = payload.analysis
 
 module.exports = alt.createStore(ItemHierarchyStore, 'ItemHierarchyStore')

@@ -5,6 +5,7 @@ ItemHierarchyStore = require('../stores/ItemHierarchyStore')
 ItemHierarchyActions = require('../actions/ItemHierarchyActions')
 
 MasterTemplate = require('./MasterTemplate')
+ItemExplorer = require('./ItemExplorer')
 
 class ItemHierarchy extends React.Component
   constructor: (props) ->
@@ -13,7 +14,7 @@ class ItemHierarchy extends React.Component
 
   componentDidMount: =>
     ItemHierarchyStore.listen(this.onChange)
-    ItemHierarchyActions.fetchChampion(this.props.params.name)
+    ItemHierarchyActions.fetchAnalysis(this.props.params.name)
 
   componentWillUnmount: =>
     ItemHierarchyStore.unlisten(this.onChange)
@@ -26,6 +27,8 @@ class ItemHierarchy extends React.Component
       return <p>Loading</p> # <Spinner />
 
     champion = this.state.champion
+    starting_items = this.state.analysis.children
+
 
     return(
       <MasterTemplate>
@@ -33,6 +36,10 @@ class ItemHierarchy extends React.Component
           <div className='splash-image__background'>
             <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{champion.name}_0.jpg" className='splash-image'/>
           </div>
+          <ItemExplorer
+            items={this.state.analysis.children}
+            caption='Starting Items'
+          />
         </section>
 
       </MasterTemplate>

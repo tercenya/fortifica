@@ -1,16 +1,18 @@
 alt = require('../alt')
-API = require('../utils/DataDragonAPI')
+API = require('../utils/AnalysisAPI')
+DDragon = require('../utils/DataDragonAPI')
 
 class ItemHierarchyActions
   constructor: ->
-    this.generateActions('receiveChampion')
+    this.generateActions('receiveAnalysis')
 
-  fetchChampion: (name) ->
+  fetchAnalysis: (name) ->
     this.dispatch()
 
-    API.fetchChampions().then( (championData) =>
-      champion = championData.data[name]
-      this.actions.receiveChampion(champion)
+    API.fetchAnalysis(name).then( (analysis) =>
+      DDragon.fetchChampion(name).then( (champion) =>
+        this.actions.receiveAnalysis({ analysis: analysis, champion: champion})
+      )
     )
 
 module.exports = alt.createActions(ItemHierarchyActions)

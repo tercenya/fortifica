@@ -13,6 +13,6 @@ class ChampionStore
   onReceiveChampions: (championData) ->
     this.isLoading = false
     this.championMap = championData.data
-    this.champions = _.values(championData.data)
+    this.champions = _.values(this.championMap)
 
 module.exports = alt.createStore(ChampionStore, 'ChampionStore')
