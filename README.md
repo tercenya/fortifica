@@ -1,26 +1,93 @@
+# Fortifica
+## an item build path and item-set generator for League of Legends
 
-CATEGORIES:
 
-- Given a data set of Black Market Brawlers match IDs, create a piece of software that utilizes the game data from these matches. You can download the data set here.
-- Given two data sets of match IDs, one before the AP Item changes and another one after, create a piece of software to demonstrate changes in AP Item usage. You can download the data set here.
-- Develop a piece of software that creates value a benefit for players utilizing the recent release of the Item Set documentation.
+## Tour of the Code
 
-TODO:
+The project is divided into three components, the _dataminer_, the _analyzer_, and the _ui_.
 
-- Vagrantfile
-- Dockerfile
-- Mongo Import
-- Analysis
-- UI
+### dataminer
 
-CRITERIA:
+Purpose:
 
-- Usefulness provided
-- Technical difficulty
-- Creativity/Originality
-- Clarity/Presentation
-- Project documentation
-- General polish
+Downloads bulk match data.  Unlike the API 1.0 competition, Riot provided [data set indexes](https://developer.riotgames.com/discussion/announcements/show/2lxEyIcE); this dataminer has been stripped down to efficiently download the massive datasets via the [match-v2.2 endpoint](https://developer.riotgames.com/api/methods#!/1027/3483).
+
+Requirements:
+
+- ruby 2.X
+- [bundler](http://bundler.io/)
+
+Setup:
+
+Add your riot API key to `config/api.key`.  A sample configuration file is provided.  This file is intentionally ignored by source control - remember not to check it in!
+
+
+WARNING:
+
+The dataminer can easily exceed developer key [rate limits](https://developer.riotgames.com/docs/api-keys), you can easily get [blacklisted](https://developer.riotgames.com/docs/rate-limiting).  You will need at least a temporary production key to run this code.  Various `sleep` statements have been removed from `lib/riot/api.rb`, which can be reimplemented if throttling is required.  See [invalesco](https://github.com/tercenya/invalesco/tree/dataminer) for a more conservative/well-behaved dataminer.
+
+```ruby
+  cd dataminer
+  bundler install
+  ./bin/parallel.rb
+```
+
+Notes:
+
+The dataminer is not general purpose, and requires configuration of the source json file in `bin/parallel.rb`.
+
+### analyzer
+
+Purpose:
+
+The analyzer takes match data provided by the dataminer and builds node-trees of used item paths.  It will comb any `.json` files located in `analyzer/data` as source material.  A convenient solution is to provide one or two sample games for testing.  You can also symlink a datamined match folder to perform a bulk run.  The output it placed in analyzer/output, and are also static data files.  No database is required for this application.
+
+WARNING: the analyzer is memory intensive.  a typical run of 5000 games usually requires at least 4GB of RAM, and running the full 5.14 provided match dataset may exceed 8GB.  Expect to run an hour per 10,000 records.
+
+Requirements
+
+- ruby 2.X
+- [bundler](http://bundler.io/)
+
+Setup:
+
+```
+  mkdir analyzer/data
+  # copy some match json files into analyzer/data
+
+  cd analyzer
+  bundler install
+  ./run.rb
+```
+
+
+### ui
+
+Purpose:
+
+The UI is a [one-way databound](https://facebook.github.io/react/docs/thinking-in-react.html) [single page](https://github.com/rackt/react-router) [react](https://facebook.github.io/react/)/[flux](https://facebook.github.io/flux/docs/overview.html) application.  
+
+The flux implementation is handled via [goatslacker/alt](https://github.com/goatslacker/alt), which vastly reduces the boilerplate.  Routing is handled via [rackt/react-router](rackt/react-router).  Curly braces are eschewed in favor of [coffeescript](http://coffeescript.org/).  React components are full [ES6 classes](https://facebook.github.io/react/docs/reusable-components.html#es6-classes) with [JSX transformation](https://facebook.github.io/react/docs/jsx-in-depth.html). Asset pipelining and compilation is handled via [webpack](https://webpack.github.io/).
+
+WARNING: Don't use the (soon-to-be) deprecated React mixins or `React.createClass`.
+
+Requirements
+
+- nodejs v0.12.X
+- [npm](https://www.npmjs.com/)
+- compilation tools (Xcode, although build-essentials should work on ubuntu, et al.)
+
+Setup:
+
+```
+  cd ui
+  npm install
+  npm run hot
+```
+
+You should be able to view the website at http://localhost:5001/app.  The hot-reload version will refresh with source-code changes to facilitate development.  You may want to replace the `ui/analysis` folder with output from your own analysis runs.
+
+To build a production version of the website, run `npm run build`.  The `ui/output` folder will have a self-contained version of the website, which is checked into the [gh-pages branch](https://github.com/tercenya/fortifica/tree/gh-pages) on github.
 
 
 # Disclaimer
