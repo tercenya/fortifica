@@ -22,4 +22,8 @@ module.exports = {
     ).then( (text) ->
       JSON.parse(text)
     )
+
+  lookupItem: (id) ->
+    items = require('../../ddragon/item.json')
+    return items.data[id]
 }

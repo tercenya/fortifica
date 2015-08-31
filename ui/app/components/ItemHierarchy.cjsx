@@ -29,7 +29,6 @@ class ItemHierarchy extends React.Component
     champion = this.state.champion
     starting_items = this.state.analysis.children
 
-
     return(
       <MasterTemplate>
         <section className='content centered item-hierarchy'>
