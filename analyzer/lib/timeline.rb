@@ -23,13 +23,48 @@ class Timeline
     end
   end
 
+  def event_frames_by_champion
+    frames.each_with_object({}) do |frame,a|
+      next unless frame['events']
+
+      frame['events'].each do |e|
+        event = Event.new(e)
+        next unless event.purchase? || event.sold?
+
+        binding.pry if event.participant_id == 0
+        champion_id = match.participant(event.participant_id)
+        a[champion_id] ||= {}
+        a[champion_id][frame] ||= []
+        a[champion_id][frame] << event
+      end
+    end
+  end
+
   def item_events
     @item_events ||= events.each_with_object({}) do |(k,v),a|
       a[k] = v.select do |e|
         e['eventType'] == 'ITEM_PURCHASED'
-      end.map do |e|
-        ItemPurchase.new(e, match)
+      end.each_with_object([]) do |e,a|
+        purchase = ItemPurchase.new(e, match)
+
+        purchase.item.from.each do |prereq|
+          unless v.find { |e2| e2['eventType'] == 'ITEM_DESTROYED' && e2['participantId'] == e['participantId'] }
+            a << ItemPurchase.new({
+              "eventType": "ITEM_PURCHASED",
+              "timestamp": e['timestamp'],
+              "itemId": prereq.id,
+              "participantId": e['participantId']}, match)
+          end
+          # a << purchase
+        end
       end
+    end
+  end
+
+  def items
+    item_events.values.flatten.each_with_object({}) do |e,a|
+      a[e.champion_id] ||= []
+      a[e.champion_id] << e.item
     end
   end
 

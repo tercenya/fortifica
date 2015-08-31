@@ -12,21 +12,39 @@ Dir['lib/*.rb'].each { |file| require_relative file }
 
 data_files = Dir['data/*.json']
 
+hierarchy = EvolutionHierarchy.new(37)
 
 
-
-data_files.each do |data_file|
+data_files.each_with_index do |data_file,i|
   match = Match.from_file(data_file)
   timeline = match.timeline
-  # match.timeline.item_events.each do |k,events|
-  #   events.each do |event|
-  #     item = event.item
-  #     next if item.consumable? || item.trinket?
-  #     puts "#{event.item.name} for #{event.champion.name}"
-  #   end
-  # end
-  timeline.starting_items.each do |champion_id, items|
+
+  puts "-- #{i} #{data_file}"
+
+  timeline.event_frames_by_champion.each do |champion_id, frames|
     champion = Champion[champion_id]
-    puts "#{champion.name}:\t#{items.map(&:name).join(', ')}"
+    next unless champion_id == 37 # HACK: sona only, for now
+
+    inventory = Inventory.new
+    frames.each do |i, events|
+      inventory.process_events(events)
+    end
+
+
+    # inventory.concat(interesting_items)
+
+    # puts "bought #{interesting_items.map(&:name).join(', ')}"
+
+    # node = hierarchy.purchased(inventory)
+
+    # puts "\n\n"
+    # puts "node is #{node}"
+    # puts "inventory is #{inventory.map(&:name).join(', ')}"
+    $stdout.flush
   end
+  break if i > 500
+end
+
+hierarchy.children.each do |node|
+  puts "#{node.item.name}: #{node.count}"
 end

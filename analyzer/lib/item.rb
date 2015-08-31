@@ -1,7 +1,7 @@
 require 'json'
 
 class Item
-  attr_reader :data
+  attr_reader :data, :id
 
   def self.all
     @all ||= begin
@@ -11,10 +11,13 @@ class Item
   end
 
   def self.[](id)
-    new(all[id])
+    target = all[id.to_i]
+    raise "didn't find item #{id}" unless target
+    new(id, target)
   end
 
-  def initialize(data)
+  def initialize(id, data)
+    @id = id
     @data = data.with_indifferent_access
   end
 
@@ -25,6 +28,17 @@ class Item
 
   def consumable?
     @data['consumed']
+  end
+
+  def from
+    return [] unless @data['from']
+    @data['from'].map { |e| self.class[e] }
+  end
+
+  def components
+    from.each_with_object([]) do |e,a|
+      a.concat(e.components)
+    end
   end
 
   def trinket?

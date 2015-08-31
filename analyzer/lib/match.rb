@@ -21,4 +21,8 @@ class Match
   def participants
     @data['participants'].map { |e| Participant.new(e, self) }
   end
+
+  def participant(id)
+    participants.find { |e| e.id == id } or throw "didn't find a participant for #{id}"
+  end
 end
