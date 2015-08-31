@@ -46,7 +46,7 @@ module.exports = {
   styles: {
     "mixins": true,
 
-    "normalize": false,
+    "normalize": true,
     "print": false,
 
     "scaffolding": true,
@@ -69,7 +69,7 @@ module.exports = {
     "pager": false,
     "labels": false,
     "badges": false,
-    "jumbotron": false,
+    "jumbotron": true,
     "thumbnails": false,
     "alerts": false,
     "progress-bars": false,
