@@ -22,6 +22,9 @@ class ItemHierarchy extends React.Component
   onChange: (store) =>
     this.setState(store)
 
+  selectPath: (path) ->
+    ItemHierarchyActions.selectPath(path)
+
   render: ->
     if this.state.isLoading
       return <p>Loading</p> # <Spinner />
@@ -36,8 +39,11 @@ class ItemHierarchy extends React.Component
             <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/#{champion.name}_0.jpg" className='splash-image'/>
           </div>
           <ItemExplorer
+            path={[]}
             items={this.state.analysis.children}
             caption='Starting Items'
+            onClick={this.selectPath}
+            path={this.state.path}
           />
         </section>
 

@@ -4,7 +4,7 @@ DDragon = require('../utils/DataDragonAPI')
 
 class ItemHierarchyActions
   constructor: ->
-    this.generateActions('receiveAnalysis')
+    this.generateActions('receiveAnalysis', 'selectPath')
 
   fetchAnalysis: (name) ->
     this.dispatch()
