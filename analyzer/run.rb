@@ -11,7 +11,7 @@ $LOAD_PATH.unshift 'lib'
 
 Dir['lib/*.rb'].each { |file| require_relative file }
 
-data_files = Dir['data/*.json']
+data_files = Dir['data/**/*.json']
 
 hierarchy = {}
 
@@ -48,15 +48,13 @@ data_files.each_with_index do |data_file,i|
     $stdout.flush
   end
   # exit
-  break if i > 5000
+  # break if i > 50000
 end
-
 
 FileUtils.rm Dir.glob('output/*.json')
 
-binding.pry
-
 hierarchy.each do |champion_id, tree|
   data = JSON.dump(tree.to_h)
-  File.write("output/#{champion_id}.json", data)
+  champion = Champion[champion_id]
+  File.write("output/#{champion.id}.json", data)
 end
