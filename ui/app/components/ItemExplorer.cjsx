@@ -4,6 +4,28 @@ Item = require('./Item')
 DDragon = require('../utils/DataDragonAPI')
 numbro = require('numbro')
 
+
+class InventoryElement extends React.Component
+  @defaultProps = {
+    path: []
+  }
+
+  onClick: =>
+    if this.props.onClick
+      console.log(this.props.path)
+      path = _.dropRight(this.props.path)
+      this.props.onClick(path)
+
+  render: ->
+    itemId = this.props.itemId
+    analysis = this.props.analysis
+
+    item = DDragon.lookupItem(itemId)
+
+    <div className='item-explorer__inventory' onClick={this.onClick}>
+      <Item itemId={itemId} />
+    </div>
+
 class ItemExplorerElement extends React.Component
   @defaultProps = {
     path: []
@@ -11,7 +33,9 @@ class ItemExplorerElement extends React.Component
 
   onClick: =>
     if this.props.onClick
-      path = this.props.path.concat([this.props.itemId])
+      # path = [].concat(this.props.path, [this.props.itemId])
+      path = this.props.path || []
+      path.push(this.props.itemId)
       this.props.onClick(path)
 
   render: ->
@@ -38,8 +62,7 @@ class ItemExplorerElement extends React.Component
 class ItemExplorer extends React.Component
   render: ->
     path = this.props.path
-    console.log("path is")
-    console.log(path)
+    onClick = this.props.onClick
 
     leaf = this.props.items
 
@@ -48,19 +71,23 @@ class ItemExplorer extends React.Component
       item = _.find leaf, (e) -> e.item_id == item_id
       leaf = item.children
 
-      <ItemExplorerElement
+      <InventoryElement
         itemId={item_id}
-        analysis={item}
         key={i}
-        path={path.slice(i)}
+        path={path.slice(0,i+1)}
+        onClick={onClick}
       />
 
     console.log(leaf)
     items = if leaf
       total = _.sum leaf, (e) -> e.count
-      onClick = this.props.onClick
 
-      _.map leaf, (analysis,i) ->
+
+      # sort by most popular
+      options = _.sortBy leaf, (e) -> e.count
+      options.reverse()
+
+      _.map options, (analysis,i) ->
         <ItemExplorerElement
           itemId={analysis.item_id}
           analysis={analysis}
@@ -75,6 +102,7 @@ class ItemExplorer extends React.Component
 
     return(
       <div className='item-explorer'>
+        Build Path:
         {inventory}
         <hr />
         {items}
