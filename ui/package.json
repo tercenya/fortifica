@@ -57,7 +57,6 @@
     "d3": "^3.5.6",
     "jquery": "^2.1.4",
     "lodash": "^3.10.0",
-    "material-design-lite": "^1.0.4-2",
     "numbro": "~1.4.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.24.3",

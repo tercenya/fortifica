@@ -10,10 +10,6 @@ module.exports = (options) ->
   base = path.join(root, 'app')
 
   entry =
-    material: [
-      path.join(root, '/config/mdl/config.coffee')
-      path.join(root, '/config/mdl/style.scss')
-    ]
     bootstrap: [
       'bootstrap-sass!' + path.join(root, '/config/bootstrap/config.js')
     ]
@@ -63,16 +59,10 @@ module.exports = (options) ->
       test: /bootstrap/
       loader: 'imports?jQuery=jquery'
     }
-    {
-      test: require.resolve('material-design-lite/material')
-      loader: 'exports?componentHandler'
-    }
   ]
 
   alias =
     fortifica: base
-    lacuna: path.join(root, 'lacuna/index')
-
 
   aliasLoader = {}
   externals = []
