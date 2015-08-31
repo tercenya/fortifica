@@ -8,12 +8,17 @@
   }
 
   .splash-image {
-    opacity: 0.8;
+    opacity: 0.6;
   }
 }
 
 .item-image {
   display: inline-block;
+}
+
+.item-explorer {
+  position: relative;
+  top: -700px;
 }
 
 .item-explorer__item-name {
