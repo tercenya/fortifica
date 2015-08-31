@@ -11,7 +11,8 @@ class Item
   end
 
   def self.[](id)
-    target = all[id.to_i]
+    id = id.to_i
+    target = all[id]
     raise "didn't find item #{id}" unless target
     new(id, target)
   end
@@ -37,7 +38,7 @@ class Item
 
   def components
     from.each_with_object([]) do |e,a|
-      a.concat(e.components)
+      a.concat(e.components + [e] )
     end
   end
 

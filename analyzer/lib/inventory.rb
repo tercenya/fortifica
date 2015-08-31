@@ -9,7 +9,7 @@ class Inventory
 
     events.each do |event|
       # ignore consumables / dropables
-      next if e.item.trinket? || e.item.consumable?
+      next if event.item.trinket? || event.item.consumable?
 
       if event.sold?
         sold << event.item
@@ -18,9 +18,16 @@ class Inventory
       end
     end
 
-    total_components = bought.map(&:components).flatten
+    total_components = bought.map(&:components).concat(bought).flatten
     missing_components = bought_components(total_components, sold)
-    puts missing_components
+
+    # # if missing_components.present?
+    #   puts "bought #{bought.map(&:name)}"
+    #   puts "sold #{sold.map(&:name)}"
+    #   puts "total_components: #{total_components.map(&:name)}"
+    #   puts "missing_components #{missing_components.map(&:name)}"
+    # # end
+    return missing_components
   end
 
   private
@@ -28,8 +35,9 @@ class Inventory
   # @note: we can't use Array#-, because it's set-difference, not item subtration
   def bought_components(total_components, sold)
     remaining = total_components.dup
-    sold.each do |item|
-      if index = remaining.index(item)
+    sold.map(&:id).each do |item_id|
+      puts "looking for #{item_id} in #{remaining.map(&:id)}"
+      if index = remaining.map(&:id).index(item_id)
         remaining.delete_at(index)
       end
     end

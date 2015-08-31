@@ -31,8 +31,10 @@ class Timeline
         event = Event.new(e)
         next unless event.purchase? || event.sold?
 
-        binding.pry if event.participant_id == 0
-        champion_id = match.participant(event.participant_id)
+        next if event.participant_id == 0 # some things happen magically!
+
+        participant = match.participant(event.participant_id) or throw "didn't find participant"
+        champion_id = participant.champion_id or throw "didn't find champion"
         a[champion_id] ||= {}
         a[champion_id][frame] ||= []
         a[champion_id][frame] << event
