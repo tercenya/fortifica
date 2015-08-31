@@ -30,6 +30,9 @@ class EvolutionHierarchy
         puts "incrementing #{item.name} on #{leaf.to_s}"
         node.increment!
         leaf = node
+      elsif false
+        # @todo: search backwards in the tree to find alternate build path
+        #   if found, call Node#attach, and increment!
       else
         node = Node.new(item, leaf)
         puts "adding #{item.name} to #{leaf.to_s}"
@@ -43,13 +46,17 @@ class EvolutionHierarchy
     attr_accessor :children
     attr_reader :item
     attr_reader :count
-    attr_reader :parent
+    attr_reader :parents
 
     def initialize(item, parent)
       @item = item
       @count = 1
       @children = []
-      @parent = parent
+      @parents = [parent]
+    end
+
+    def attach(parent)
+      @parents << parent
     end
 
     def item_id
@@ -65,7 +72,7 @@ class EvolutionHierarchy
     end
 
     def to_s
-      "#{name} [#{item_id}] (#{count}) -> #{parent.to_s}"
+      "#{name} [#{item_id}] (#{count}) -> #{parents.first.to_s}"
     end
 
     def root?
