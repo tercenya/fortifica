@@ -19,8 +19,8 @@ class MasterTemplate extends React.Component
         <div className="master-layout #{klass}">
           <header className='masthead'>
             <div className='masthead-title__container'>
-              <p className='masthead-title' id='title'>fortifica</p>
-              <p className='masthead-subtitle'>Item Build Path Generator for League of Legends</p>
+              <Link className='masthead-title' id='title' to='home'>fortifica</Link>
+              <div className='masthead-subtitle'>Item Build Path Generator for League of Legends</div>
             </div>
             <nav className='master-nav'>
               <Link className='master-nav__link' to='champions' onClick={this.scrollToChampions}>Champions</Link>
