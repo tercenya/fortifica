@@ -78,6 +78,15 @@ class ItemExplorer extends React.Component
         onClick={onClick}
       />
 
+    downloadButton = if inventory
+      <button
+        className='btn download-button'
+        onClick={this.generateItemSet}
+      >
+        Download Item Set
+      </button>
+
+
     console.log(leaf)
     items = if leaf
       total = _.sum leaf, (e) -> e.count
@@ -102,6 +111,7 @@ class ItemExplorer extends React.Component
 
     return(
       <div className='item-explorer'>
+        <div className='download-button__container'>{downloadButton}</div>
         Build Path:
         {inventory}
         <hr />

@@ -29,7 +29,7 @@ module.exports = {
   scripts: {
     'transition': false,
     'alert': false,
-    'button': false,
+    'button': true,
     'carousel': false,
     'collapse': false,
     'dropdown': false,
@@ -55,7 +55,7 @@ module.exports = {
     "grid": true,
     "tables": false,
     "forms": false,
-    "buttons": false,
+    "buttons": true,
 
     "component-animations": false,
     "glyphicons": false,

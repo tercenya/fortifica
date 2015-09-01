@@ -30,3 +30,37 @@
   display: inline-block;
   padding: 8px;
 }
+
+.download-button__container {
+  float: right;
+}
+
+.download-button {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 0px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  background-color: #222;
+}
+
+.download-button:hover,
+.download-button:active,
+.download-button:focus {
+  border: 0;
+  background-color: #444;
+  color: white;
+}
