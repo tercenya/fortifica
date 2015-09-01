@@ -6,9 +6,9 @@ Home = require('../components/Home')
 ItemHierarchy = require('../components/ItemHierarchy')
 
 routes = (
-    <Route name='root' path='/' handler={Layout}>
+    <Route name='root' path='/fortifica/' handler={Layout}>
       <DefaultRoute name='home' handler={Home} />
-      <Route path='/champion/:name' name='championDetails' handler={ItemHierarchy} />
+      <Route path='/fortifica/champion/:name' name='championDetails' handler={ItemHierarchy} />
     </Route>
 )
 
