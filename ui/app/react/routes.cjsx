@@ -3,12 +3,14 @@ React = require('react')
 
 Layout = require('./Layout')
 Home = require('../components/Home')
+Champions = require('../components/Champions')
 ItemHierarchy = require('../components/ItemHierarchy')
 
 routes = (
-    <Route name='root' path='/fortifica/' handler={Layout}>
+    <Route name='root' path='/' handler={Layout}>
       <DefaultRoute name='home' handler={Home} />
-      <Route path='/fortifica/champion/:name' name='championDetails' handler={ItemHierarchy} />
+      <Route path='/champions' name='champions' handler={Champions} />
+      <Route path='/champions/:name' name='championDetails' handler={ItemHierarchy} />
     </Route>
 )
 
