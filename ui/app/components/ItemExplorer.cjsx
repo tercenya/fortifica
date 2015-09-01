@@ -78,7 +78,6 @@ class ItemExplorer extends React.Component
     leaf = this.props.items
 
     inventory = _.map path, (item_id,i) ->
-      console.log("inventory: #{item_id}")
       item = _.find leaf, (e) -> e.item_id == item_id
       leaf = item.children
 
@@ -89,7 +88,7 @@ class ItemExplorer extends React.Component
         onClick={onClick}
       />
 
-    downloadButton = if inventory
+    downloadButton = if path.length > 0
       <DownloadButton
         className='btn download-button'
         genFile={this.generateItemSet}
