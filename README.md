@@ -1,6 +1,9 @@
 # Fortifica
 An item build path and item-set generator for League of Legends
 
+## Live Url
+
+[http://tercenya.github.io/fortifica](http://tercenya.github.io/fortifica)
 
 ## Tour of the Code
 
@@ -19,7 +22,7 @@ The flux implementation is handled via [goatslacker/alt](https://github.com/goat
 
 - nodejs v0.12.X
 - [npm](https://www.npmjs.com/)
-- compilation tools (Xcode and command-line tools)
+- compilation tools (Xcode and command-line tools, or build-essentials)
 
 To install and run,
 
@@ -29,15 +32,15 @@ To install and run,
   npm run hot
 ```
 
-You should be able to view the website at http://localhost:5001/app.  The hot-reload version will refresh with source-code changes to facilitate development.  You may want to replace the `ui/analysis` folder with output from your own analysis runs.
+You can view the development website at http://localhost:5001/fortifica/.  The server will hot-reload upon source-code changes to facilitate development.  You may want to replace the `ui/analysis` folder with output from your own analysis runs.
 
-To build a production version of the website, run `npm run build`.  The `ui/output` folder will have a self-contained version of the website, which is checked into the [gh-pages branch](https://github.com/tercenya/fortifica/tree/gh-pages) on github.
+To build a production version of the website, run `npm run build`.  The `ui/output` folder will have a self-contained version of the website, which is checked into the [gh-pages branch](https://github.com/tercenya/fortifica/tree/gh-pages) on github.  Don't forget to include an `analysis` folder.
 
 #### WARNINGS
 
-Don't use the (soon-to-be) deprecated React mixins or `React.createClass`.
+Avoid use the (soon-to-be) deprecated React mixins or `React.createClass`.
 
-Don't `require('analysis/Champion.json')` - you severely bloat the application, assuming you don't OOM the transpiler.
+Don't `require('analysis/Champion.json')` - you severely bloat the application, assuming you don't OOM the transpiler first.
 
 ## analyzer
 
@@ -45,7 +48,7 @@ Don't `require('analysis/Champion.json')` - you severely bloat the application, 
 
 The analyzer takes match data provided by the dataminer and builds node-trees of used item paths.  It will comb any `.json` files located in `analyzer/data` as source material.  A convenient solution is to provide one or two sample games for testing.  You can also symlink a datamined match folder to perform a bulk run.  The output it placed in analyzer/output, and are also static data files.  No database is required for this application.
 
-WARNING: the analyzer is memory intensive.  a typical run of 5000 games usually requires at least 4GB of RAM, and running the full 5.14 provided match dataset may exceed 8GB.  Expect to run an hour per 10,000 records.
+WARNING: the analyzer is memory intensive.  a typical run of 5000 games usually requires at least 4GB of RAM, and running the full 5.14 provided match dataset exceeds 24GB and numerous CPU hours.
 
 ##### Requirements
 
