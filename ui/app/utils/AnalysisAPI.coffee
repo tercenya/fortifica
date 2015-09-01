@@ -6,7 +6,7 @@ headers = {
 
 module.exports = {
   fetchAnalysis: (id) ->
-    fetch("/analysis/#{id}.json",
+    fetch("./analysis/#{id}.json",
       method: 'get',
       headers: headers
     ).then( (response) ->
