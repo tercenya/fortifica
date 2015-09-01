@@ -2,7 +2,7 @@ _ = require('lodash')
 
 module.exports =
   build: (path, champion) ->
-    items = _.each path, (item_id, i) ->
+    items = _.map path, (item_id, i) ->
       {
         "id": "#{item_id}"
         "count": 1
