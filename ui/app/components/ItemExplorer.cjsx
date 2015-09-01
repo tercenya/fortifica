@@ -25,7 +25,7 @@ class InventoryElement extends React.Component
 
     item = DDragon.lookupItem(itemId)
 
-    <div className='item-explorer__inventory' onClick={this.onClick}>
+    <div className='item-explorer__inventory-items' onClick={this.onClick}>
       <Item itemId={itemId} />
     </div>
 
@@ -117,14 +117,19 @@ class ItemExplorer extends React.Component
 
     return(
       <div className='item-explorer'>
-        <div className='download-button__container'>{downloadButton}</div>
-        <h3 className='build-path__text'>
-          {this.props.champion.name}
-          <br/>
-          Build Path
-        </h3>
-        {inventory}
-        <hr />
+        <div className='item-explorer__inventory'>
+          <div className='download-button__container'>{downloadButton}</div>
+          <div className='build-path__text'>
+            <h2 className='build-path__champion'>
+              {this.props.champion.name}
+            </h2>
+            <h3 className='build-path__caption'>
+              Build Path
+            </h3>
+          </div>
+          {inventory}
+        </div>
+        <hr className='bar' />
         {items}
       </div>
     )
