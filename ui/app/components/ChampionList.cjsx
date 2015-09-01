@@ -25,7 +25,6 @@ class ChampionList extends React.Component
     if this.state.isLoading
       return <p>Loading</p> # <Spinner />
 
-    console.log(this.state.champions)
     championList = this.state.champions.map (e) ->
       <ChampionListItem champion={e} key={e.id} />
 

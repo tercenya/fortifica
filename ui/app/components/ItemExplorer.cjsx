@@ -16,7 +16,6 @@ class InventoryElement extends React.Component
 
   onClick: =>
     if this.props.onClick
-      console.log(this.props.path)
       path = _.dropRight(this.props.path)
       this.props.onClick(path)
 
@@ -95,8 +94,6 @@ class ItemExplorer extends React.Component
         downloadTitle='Download Item Set'
       />
 
-
-    console.log(leaf)
     items = if leaf
       total = _.sum leaf, (e) -> e.count
 
@@ -121,7 +118,11 @@ class ItemExplorer extends React.Component
     return(
       <div className='item-explorer'>
         <div className='download-button__container'>{downloadButton}</div>
-        Build Path:
+        <h3 className='build-path__text'>
+          {this.props.champion.name}
+          <br/>
+          Build Path
+        </h3>
         {inventory}
         <hr />
         {items}
