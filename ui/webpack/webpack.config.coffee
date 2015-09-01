@@ -85,7 +85,7 @@ module.exports = (options) ->
     '.scss'
   ]
 
-  publicPath = if options.devServer then 'http://localhost:5001/assets/' else '/assets'
+  publicPath = if options.devServer then 'http://localhost:5001/fortifica/assets/' else '/assets'
 
   output =
     path: path.join(root, 'build', 'assets')
