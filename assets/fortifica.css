@@ -131,12 +131,18 @@ body {
   padding-left: 8px;
   display: inline-block; }
 
-.item-explorer__inventory {
+.item-explorer__inventory-items {
   display: inline-block;
   padding: 8px; }
 
+.item-explorer__inventory {
+  width: 100%;
+  height: 91px; }
+
 .download-button__container {
-  float: right; }
+  float: right;
+  position: relative;
+  top: 30px; }
 
 .download-button {
   display: inline-block;
@@ -166,4 +172,12 @@ body {
   color: white; }
 
 .build-path__text {
-  display: inline-block; }
+  display: inline-block;
+  padding-right: 20px; }
+  .build-path__text h2, .build-path__text h3 {
+    padding: 0;
+    margin: 0; }
+  .build-path__text .build-path__champion {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-style: italic; }
