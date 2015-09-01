@@ -59,6 +59,10 @@ module.exports = (options) ->
       test: /bootstrap/
       loader: 'imports?jQuery=jquery'
     }
+    {
+      test: /downloadbutton/
+      loader: 'babel-loader?stage=0'
+    }
   ]
 
   alias =
