@@ -1426,7 +1426,7 @@
 /* 237 */
 /***/ function(module, exports) {
 
-	eval("var headers;\n\nheaders = {\n  'Accept': 'application/json',\n  'Content-Type': 'application/json'\n};\n\nmodule.exports = {\n  fetchAnalysis: function(id) {\n    return fetch(\"/analysis/\" + id + \".json\", {\n      method: 'get',\n      headers: headers\n    }).then(function(response) {\n      return response.text();\n    }).then(function(text) {\n      return JSON.parse(text);\n    });\n  }\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./app/utils/AnalysisAPI.coffee\n ** module id = 237\n ** module chunks = 1\n **/\n//# sourceURL=webpack:///./app/utils/AnalysisAPI.coffee?");
+	eval("var headers;\n\nheaders = {\n  'Accept': 'application/json',\n  'Content-Type': 'application/json'\n};\n\nmodule.exports = {\n  fetchAnalysis: function(id) {\n    return fetch(\"./analysis/\" + id + \".json\", {\n      method: 'get',\n      headers: headers\n    }).then(function(response) {\n      return response.text();\n    }).then(function(text) {\n      return JSON.parse(text);\n    });\n  }\n};\n\n\n/*****************\n ** WEBPACK FOOTER\n ** ./app/utils/AnalysisAPI.coffee\n ** module id = 237\n ** module chunks = 1\n **/\n//# sourceURL=webpack:///./app/utils/AnalysisAPI.coffee?");
 
 /***/ },
 /* 238 */
