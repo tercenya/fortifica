@@ -32,7 +32,10 @@ body {
     font-weight: 800;
     font-variant: small-caps;
     font-family: 'Helvetica Neue';
-    letter-spacing: 2.5px; }
+    letter-spacing: 2.5px;
+    color: white; }
+  .masthead .masthead-title:hover {
+    text-decoration: none; }
   .masthead .masthead-subtitle {
     font-size: 1em;
     margin: 0; }
@@ -49,14 +52,14 @@ body {
       border-right: none; }
 
 .halfpage .masthead {
-  height: 50em; }
+  height: 25em; }
   .halfpage .masthead .masthead-title__container {
     position: relative;
-    bottom: -40em;
+    bottom: -15em;
     padding-left: 28px; }
 
 .halfpage .master-nav {
-  bottom: -42em; }
+  bottom: -17em; }
 
 .topbar .masthead-title__container {
   display: inline-block;
@@ -127,6 +130,19 @@ body {
   padding-left: 48px;
   padding-right: 48px; }
 
+.item-explorer__item .item-image {
+  position: relative;
+  top: -6px;
+  left: 8px;
+  padding-right: 16px;
+  opacity: 1; }
+
+.item-explorer__item:hover {
+  background-color: rgba(255, 255, 255, 0.2); }
+
+.item-explorer__inventory-items:hover {
+  background-color: rgba(255, 0, 0, 0.3); }
+
 .item-explorer__item-name {
   padding-left: 8px;
   display: inline-block; }
@@ -181,3 +197,23 @@ body {
     padding-top: 8px;
     padding-bottom: 8px;
     font-style: italic; }
+
+.methodology {
+  max-width: 1231px;
+  background-color: black;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 48px;
+  padding-right: 48px; }
+  .methodology .splash-image__background {
+    background-color: black; }
+  .methodology .splash-image {
+    opacity: 0.5; }
+  .methodology .text {
+    position: relative;
+    top: -1018px;
+    padding-left: 20px;
+    padding-right: 20px; }
+  .methodology hr {
+    opacity: 0.5; }
