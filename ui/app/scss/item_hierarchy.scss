@@ -23,6 +23,24 @@
   padding-right: 48px;
 }
 
+.item-explorer__item {
+  .item-image {
+    position: relative;
+    top: -6px;
+    left: 8px;
+    padding-right: 16px;
+    opacity: 1;
+  }
+}
+
+.item-explorer__item:hover {
+  background-color: rgba(255,255,255,0.2)
+}
+
+.item-explorer__inventory-items:hover {
+  background-color: rgba(255,0,0,0.3)
+}
+
 .item-explorer__item-name {
   padding-left: 8px;
   display: inline-block;
