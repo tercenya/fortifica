@@ -217,3 +217,25 @@ body {
     padding-right: 20px; }
   .methodology hr {
     opacity: 0.5; }
+
+.about {
+  max-width: 1231px;
+  background-color: black;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 48px;
+  padding-right: 48px; }
+  .about .splash-image__background {
+    background-color: black; }
+  .about .splash-image {
+    opacity: 0.8; }
+  .about .text {
+    line-height: 1.5;
+    position: relative;
+    top: -683px;
+    max-width: 350px;
+    padding-left: 20px;
+    padding-right: 20px; }
+  .about hr {
+    opacity: 0.5; }
