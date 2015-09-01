@@ -24,7 +24,7 @@ class MasterTemplate extends React.Component
             </div>
             <nav className='master-nav'>
               <Link className='master-nav__link' to='champions' onClick={this.scrollToChampions}>Champions</Link>
-              <a className='master-nav__link' href='#/methodology'>Methodology</a>
+              <Link className='master-nav__link' to='faq'>How To - FAQ</Link>
               <a className='master-nav__link' href='#/about'>About</a>
            </nav>
           </header>
