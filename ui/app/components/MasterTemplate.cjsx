@@ -1,5 +1,6 @@
 React = require('react')
 $ = require('jquery')
+{ Link } = require('react-router')
 
 class MasterTemplate extends React.Component
   @defaultProps = {
@@ -22,7 +23,7 @@ class MasterTemplate extends React.Component
               <p className='masthead-subtitle'>Item Build Path Generator for League of Legends</p>
             </div>
             <nav className='master-nav'>
-              <a className='master-nav__link' href='#' onClick={this.scrollToChampions}>Champions</a>
+              <Link className='master-nav__link' to='champions' onClick={this.scrollToChampions}>Champions</Link>
               <a className='master-nav__link' href='#/methodology'>Methodology</a>
               <a className='master-nav__link' href='#/about'>About</a>
            </nav>
