@@ -1,8 +1,12 @@
 _ = require('lodash')
 React = require('react')
+numbro = require('numbro')
+DownloadButton = require('downloadbutton')
+
 Item = require('./Item')
 DDragon = require('../utils/DataDragonAPI')
-numbro = require('numbro')
+ItemSetGenerator = require('../utils/ItemSetGenerator')
+
 
 
 class InventoryElement extends React.Component
@@ -60,6 +64,13 @@ class ItemExplorerElement extends React.Component
     </div>
 
 class ItemExplorer extends React.Component
+  generateItemSet: =>
+    {
+      mime: 'text/json'
+      filename: "foritifica-#{Date.now()}.json"
+      contents: ItemSetGenerator.build(this.props.path, this.props.champion)
+    }
+
   render: ->
     path = this.props.path
     onClick = this.props.onClick
@@ -79,12 +90,11 @@ class ItemExplorer extends React.Component
       />
 
     downloadButton = if inventory
-      <button
+      <DownloadButton
         className='btn download-button'
-        onClick={this.generateItemSet}
-      >
-        Download Item Set
-      </button>
+        genFile={this.generateItemSet}
+        downloadTitle='Download Item Set'
+      />
 
 
     console.log(leaf)

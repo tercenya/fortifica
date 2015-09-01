@@ -44,6 +44,7 @@ class ItemHierarchy extends React.Component
             caption='Starting Items'
             onClick={this.selectPath}
             path={this.state.path}
+            champion={champion}
           />
         </section>
 

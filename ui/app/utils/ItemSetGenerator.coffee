@@ -2,16 +2,17 @@ _ = require('lodash')
 
 module.exports =
   build: (path, champion) ->
-    blocks = _.each path, (item_id, i) ->
+    items = _.each path, (item_id, i) ->
       {
-        "type": "#{i}"
+        "id": "#{item_id}"
+        "count": 1
+      }
+
+    blocks =
+      {
+        "type": "0"
         "recMath": false
-        "items": [
-          {
-            "id": "#{item_id}"
-            "count": 1
-          }
-        ]
+        "items": items
       }
 
     data = {
@@ -23,3 +24,5 @@ module.exports =
       "sortrank": 0
       "blocks": blocks
     }
+
+    return JSON.stringify(data)
